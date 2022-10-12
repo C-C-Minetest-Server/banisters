@@ -1,0 +1,4 @@
+Mod written by Felfa under LGPL 3.0 for code and CC-by-SA 4.0 for models and textures. More info about these licenses at LICENSE file.
+
+Basic models for the banisters and nodeboxes definitions taken from VanessaE's homedecor mod:
+https://github.com/mt-mods/homedecor_modpack
