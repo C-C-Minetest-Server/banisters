@@ -6,10 +6,12 @@ Banisters mod for Minetest. Adds straight and diagonal banisters for stairs rail
 - not yet
 
 ## To do list
-- Add more banister models rather than basic ones.
-- Add support for other textures (other wood, baked clay, etc).
+- Add craft recipes.
 
 ## Changelog
 
 ### 0.12b
 - Initial public release. Added basic wooden banisters.
+
+### 0.14b
+- Added more types and materials. Simplified register function.

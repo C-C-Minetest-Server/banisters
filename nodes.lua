@@ -1,53 +1,46 @@
 local S = banisters.intllib
 
--- nodeboxes taken from VanessaE's homedecor
-local cbox_d = {
-	type = "fixed",
-	fixed = { -9/16, -3/16, 5/16, 9/16, 24/16, 8/16 }
-}
+function banisters.register(material, texture)	
 
-local cbox_h = {
-	type = "fixed",
-	fixed = { -8/16, -8/16, 5/16, 8/16, 8/16, 8/16 }
-}
-		
-function banisters.register(material, name, style, texture)
-	minetest.register_node("banisters:".. material .. "_horizontal", {
-		description = S(name .. " Straight Banister"),
-		drawtype = "mesh",
-		selection_box = cbox_h,
-		collision_box = cbox_h,
-		paramtype = "light",
-		paramtype2 = "facedir",
-		groups = {snappy = 2},
-		drawtype = "mesh",
-		mesh = style .. "_horizontal.obj",
-		tiles = {texture}
-	})
+	local types = {
+		"_horizontal",
+		"_diagonal_left",
+		"_diagonal_right"
+	}
+
+	local styles = {
+		"basic",
+		"fancy"
+	}
+
+	for i, s in pairs(styles)
+	do
+		for j, t in pairs(types)
+		do
+			local itemstring = string.format("banisters:%s_%s%s", material, s, t)
+
+			-- nodeboxes taken from VanessaE's homedecor
+			local cbox = {
+				type = "fixed",
+				fixed = { -9/16, -3/16, 5/16, 9/16, 24/16, 8/16 }
+			}		
+			
+			if t == "_horizontal" then
+				cbox.fixed = { -8/16, -8/16, 5/16, 8/16, 8/16, 8/16 }
+			end
 	
-	minetest.register_node("banisters:".. material .. "_diagonal_left", {
-		description = S(name .. " Diagonal Banister (left)"),
-		drawtype = "mesh",
-		selection_box = cbox_d,
-		collision_box = cbox_d,
-		paramtype = "light",
-		paramtype2 = "facedir",
-		groups = {snappy = 2},
-		drawtype = "mesh",
-		mesh = style .. "_diagonal_left.obj",
-		tiles = {texture}
-	})
-	
-	minetest.register_node("banisters:".. material .. "_diagonal_right", {
-		description = S(name .. " Diagonal Banister (right)"),
-		drawtype = "mesh",
-		selection_box = cbox_d,
-		collision_box = cbox_d,
-		paramtype = "light",
-		paramtype2 = "facedir",
-		groups = {snappy = 2},
-		drawtype = "mesh",
-		mesh = style .. "_diagonal_right.obj",
-		tiles = {texture}
-	})
+			minetest.register_node(itemstring, {
+				description = S(s .. " " .. material .. " banister"),
+				drawtype = "mesh",	
+				selection_box = cbox,
+				collision_box = cbox,
+				paramtype = "light",
+				paramtype2 = "facedir",
+				groups = {snappy = 3},
+				drawtype = "mesh",
+				mesh = s .. t .. ".obj",
+				tiles = {texture}
+			})
+		end
+	end
 end
