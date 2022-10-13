@@ -1,4 +1,6 @@
-banisters = {}
+banisters = {
+	version = "0.2b",
+}
 local path = minetest.get_modpath("banisters")
 local S = minetest.get_translator and minetest.get_translator("banisters") or dofile(path .. "/intllib.lua")
 banisters.intllib = S
