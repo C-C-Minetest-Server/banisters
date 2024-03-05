@@ -2,6 +2,8 @@
 
 Banisters mod for Minetest. Adds straight and diagonal banisters for stairs railings.
 
+This mod is a fork of [Felfa's banisters mod](https://gitlab.com/Felfa/banisters).
+
 ## How can I craft them?
 
 You can craft normal banisters simply by using this recipe:
