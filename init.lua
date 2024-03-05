@@ -20,7 +20,7 @@
 ]]
 
 banisters = {
-	version = "0.3",
+	version = "1.0",
 }
 banisters.intllib = minetest.get_translator and minetest.get_translator("banisters")
 
