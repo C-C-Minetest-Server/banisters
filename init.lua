@@ -25,5 +25,5 @@ banisters = {
 banisters.intllib = minetest.get_translator and minetest.get_translator("banisters")
 
 local path = minetest.get_modpath("banisters")
-dofile(minetest.get_modpath("banisters").."/register.lua")
-dofile(minetest.get_modpath("banisters").."/crafts.lua")
+dofile(minetest.get_modpath("banisters") .. "/register.lua")
+dofile(minetest.get_modpath("banisters") .. "/crafts.lua")
