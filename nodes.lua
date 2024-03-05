@@ -66,7 +66,7 @@ function banisters.on_place_side(itemstack, placer, pointed_thing)
 end
 
 -- Node register function
-function banisters.register(material, texture, recipe_item)
+function banisters.register(tech_name, texture, orig_node)
 	local types = {
 		"_horizontal",
 		"_diagonal_left",
@@ -78,11 +78,9 @@ function banisters.register(material, texture, recipe_item)
 		"fancy"
 	}
 
-	for i, s in pairs(styles)
-	do
-		for j, t in pairs(types)
-		do
-			local itemstring = string.format("banisters:%s_%s%s", material, s, t)
+	for i, s in pairs(styles) do
+		for j, t in pairs(types) do
+			local itemstring = string.format("banisters:%s_%s%s", tech_name, s, t)
 
 			-- nodeboxes taken from VanessaE's homedecor
 			local cbox = {
@@ -91,32 +89,37 @@ function banisters.register(material, texture, recipe_item)
 			}
 
 			local g = { snappy = 3, not_in_creative_inventory = 1 }
+			local name = minetest.registered_nodes[orig_node].description or tech_name
+			local desc = nil
 
 			if t == "_horizontal" then
 				cbox.fixed = { -8 / 16, -8 / 16, 5 / 16, 8 / 16, 8 / 16, 8 / 16 }
 				g = { snappy = 3 }
 
 				if s == "basic" then
+					desc = S("Basic @1 banister", name)
 					minetest.register_craft({
-						output = string.format("banisters:%s_basic_horizontal 3", material),
+						output = string.format("banisters:%s_basic_horizontal 3", tech_name),
 						recipe = {
-							{ recipe_item,   recipe_item, recipe_item },
-							{ 'group:stick', '',          'group:stick' }
+							{ orig_node,     orig_node, orig_node },
+							{ 'group:stick', '',        'group:stick' }
 						}
 					})
 				elseif s == "fancy" then
+					desc = S("Fancy @1 banister", name)
 					minetest.register_craft({
-						output = string.format("banisters:%s_fancy_horizontal 3", material),
+						output = string.format("banisters:%s_fancy_horizontal 3", tech_name),
 						recipe = {
-							{ recipe_item,   recipe_item,   recipe_item },
+							{ orig_node,     orig_node,     orig_node },
 							{ 'group:stick', 'group:stick', 'group:stick' }
 						}
 					})
 				end
 			end
 
+
 			minetest.register_node(itemstring, {
-				description = S(s .. " " .. material .. " banister"),
+				description = desc,
 				drawtype = "mesh",
 				selection_box = cbox,
 				collision_box = cbox,
@@ -126,8 +129,8 @@ function banisters.register(material, texture, recipe_item)
 				groups = g,
 				drawtype = "mesh",
 				mesh = s .. t .. ".obj",
-				tiles = { texture },
-				drop = string.format("banisters:%s_%s_horizontal", material, s)
+				tiles = minetest.registered_nodes[orig_node].tiles,
+				drop = string.format("banisters:%s_%s_horizontal", tech_name, s)
 			})
 		end
 	end

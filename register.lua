@@ -33,16 +33,16 @@ if minetest.get_modpath("default") then
 end
 
 if minetest.get_modpath("ethereal") then
-	banisters.register("bamboo", "bamboo_floor.png", "ethereal:bamboo_block")
-	banisters.register("banana", "banana_wood.png", "ethereal:banana_wood")
+	banisters.register("bamboo", "ethereal_bamboo_floor.png", "ethereal:bamboo_block")
+	banisters.register("banana", "ethereal_banana_wood.png", "ethereal:banana_wood")
 	banisters.register("birch", "moretrees_birch_wood.png", "ethereal:birch_wood")
-	banisters.register("frost", "frost_wood.png", "ethereal:frost_wood")
-	banisters.register("olive", "olive_wood.png", "ethereal:olive_wood")
+	banisters.register("frost", "ethereal_frost_wood.png", "ethereal:frost_wood")
+	banisters.register("olive", "ethereal_olive_wood.png", "ethereal:olive_wood")
 	banisters.register("palm", "moretrees_palm_wood.png", "ethereal:palm_wood")
-	banisters.register("redwood", "redwood_wood.png", "ethereal:redwood_wood")
+	banisters.register("redwood", "ethereal_redwood_wood.png", "ethereal:redwood_wood")
 	banisters.register("sakura", "ethereal_sakura_wood.png", "ethereal:sakura_wood")
-	banisters.register("willow", "willow_wood.png", "ethereal:willow_wood")
-	banisters.register("yellow", "yellow_wood.png", "ethereal:yellow_wood")
+	banisters.register("willow", "ethereal_willow_wood.png", "ethereal:willow_wood")
+	banisters.register("yellow", "ethereal_yellow_wood.png", "ethereal:yellow_wood")
 end
 
 if minetest.get_modpath("maple") then
