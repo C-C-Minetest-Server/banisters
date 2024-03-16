@@ -65,6 +65,29 @@ function banisters.on_place_side(itemstack, placer, pointed_thing)
 	end
 end
 
+local keep_groups = {
+	-- General groups
+	"not_in_creative_inventory",
+
+	-- Minetest Game dig groups
+	"crumby", "cracky", "snappy", "choppy", "fleshy", "explody", "oddly_breakable_by_hand", "dig_immediate",
+
+	-- MineClone2 dig groups
+	"pickaxey", "axey", "shovely", "swordly", "shearsy", "handy", "creative_breakable",
+
+	-- MineClone2 interaction groups
+	"flammable", "fire_encouragement", "fire_flammability",
+}
+local function prepare_groups(groups)
+	if not groups then return {} end
+
+	local rtn = {}
+	for _, key in ipairs(keep_groups) do
+		rtn[key] = groups[key]
+	end
+	return rtn
+end
+
 -- Node register function
 function banisters.register(tech_name, texture, orig_node)
 	local types = {
@@ -88,13 +111,12 @@ function banisters.register(tech_name, texture, orig_node)
 				fixed = { -9 / 16, -3 / 16, 5 / 16, 9 / 16, 24 / 16, 8 / 16 }
 			}
 
-			local g = { snappy = 3, not_in_creative_inventory = 1 }
+			local g = prepare_groups(minetest.registered_nodes[orig_node].groups)
 			local name = minetest.registered_nodes[orig_node].description or tech_name
-			local desc = nil
+			local desc
 
 			if t == "_horizontal" then
 				cbox.fixed = { -8 / 16, -8 / 16, 5 / 16, 8 / 16, 8 / 16, 8 / 16 }
-				g = { snappy = 3 }
 
 				if s == "basic" then
 					desc = S("Basic @1 banister", name)
@@ -115,6 +137,8 @@ function banisters.register(tech_name, texture, orig_node)
 						}
 					})
 				end
+			else
+				g.not_in_creative_inventory = 1
 			end
 
 
@@ -130,6 +154,7 @@ function banisters.register(tech_name, texture, orig_node)
 				drawtype = "mesh",
 				mesh = s .. t .. ".obj",
 				tiles = minetest.registered_nodes[orig_node].tiles,
+				sounds = minetest.registered_nodes[orig_node].sounds,
 				drop = string.format("banisters:%s_%s_horizontal", tech_name, s)
 			})
 		end
