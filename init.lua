@@ -20,10 +20,10 @@
 ]]
 
 banisters = {
-	version = "1.0",
+    version = "1.0",
 }
-banisters.intllib = minetest.get_translator and minetest.get_translator("banisters")
+banisters.intllib = core.get_translator and core.get_translator("banisters")
 
-local path = minetest.get_modpath("banisters")
-dofile(minetest.get_modpath("banisters") .. "/nodes.lua")
-dofile(minetest.get_modpath("banisters") .. "/register.lua")
+local path = core.get_modpath("banisters")
+dofile(path.. "/nodes.lua")
+dofile(path.. "/register.lua")

@@ -25,7 +25,7 @@ local S = banisters.intllib
 -- (Code snippet taken from display_modpack by pyrollo).
 function banisters.on_place_side(itemstack, placer, pointed_thing)
 	local name = itemstack:get_name()
-	local ndef = minetest.registered_nodes[name]
+	local ndef = core.registered_nodes[name]
 
 	local bdir = {
 		x = pointed_thing.under.x - pointed_thing.above.x,
@@ -39,11 +39,11 @@ function banisters.on_place_side(itemstack, placer, pointed_thing)
 	if ndef.paramtype2 == "facedir" then
 		if bdir.x == 0 and bdir.z == 0 then
 			-- Ceiling or floor pointed (facedir chosen from player dir)
-			ndir = minetest.dir_to_facedir({ x = pdir.x, y = 0, z = pdir.z })
-			return minetest.item_place(itemstack, placer, pointed_thing, ndir)
+			ndir = core.dir_to_facedir({ x = pdir.x, y = 0, z = pdir.z })
+			return core.item_place(itemstack, placer, pointed_thing, ndir)
 		else
 			-- Wall pointed
-			ndir = minetest.dir_to_facedir(bdir)
+			ndir = core.dir_to_facedir(bdir)
 		end
 
 		test = { [0] = -pdir.x, pdir.z, pdir.x, -pdir.z }
@@ -56,12 +56,12 @@ function banisters.on_place_side(itemstack, placer, pointed_thing)
 		elseif test[ndir] < -0.5 then
 			itemstack:set_name(name:sub(1, -11) .. "diagonal_right")
 		end
-		itemstack = minetest.item_place(itemstack, placer, pointed_thing, ndir)
+		itemstack = core.item_place(itemstack, placer, pointed_thing, ndir)
 		itemstack:set_name(name)
 
 		return itemstack
 	else
-		return minetest.item_place(itemstack, placer, pointed_thing, ndir)
+		return core.item_place(itemstack, placer, pointed_thing, ndir)
 	end
 end
 
@@ -89,7 +89,7 @@ local function prepare_groups(groups)
 end
 
 -- Node register function
-function banisters.register(tech_name, texture, orig_node)
+function banisters.register(mod_name, tech_name, orig_node)
 	local types = {
 		"_horizontal",
 		"_diagonal_left",
@@ -101,9 +101,11 @@ function banisters.register(tech_name, texture, orig_node)
 		"fancy"
 	}
 
-	for i, s in pairs(styles) do
-		for j, t in pairs(types) do
-			local itemstring = string.format("banisters:%s_%s%s", tech_name, s, t)
+	mod_name = mod_name or core.get_current_modname()
+
+	for s in pairs(styles) do
+		for t in pairs(types) do
+			local itemstring = string.format(":%s:%s_%s%s", mod_name, tech_name, s, t)
 
 			-- nodeboxes taken from VanessaE's homedecor
 			local cbox = {
@@ -111,8 +113,8 @@ function banisters.register(tech_name, texture, orig_node)
 				fixed = { -9 / 16, -3 / 16, 5 / 16, 9 / 16, 24 / 16, 8 / 16 }
 			}
 
-			local g = prepare_groups(minetest.registered_nodes[orig_node].groups)
-			local name = minetest.registered_nodes[orig_node].description or tech_name
+			local g = prepare_groups(core.registered_nodes[orig_node].groups)
+			local name = core.registered_nodes[orig_node].description or tech_name
 			local desc
 
 			if t == "_horizontal" then
@@ -120,7 +122,7 @@ function banisters.register(tech_name, texture, orig_node)
 
 				if s == "basic" then
 					desc = S("Basic @1 banister", name)
-					minetest.register_craft({
+					core.register_craft({
 						output = string.format("banisters:%s_basic_horizontal 3", tech_name),
 						recipe = {
 							{ orig_node,     orig_node, orig_node },
@@ -129,7 +131,7 @@ function banisters.register(tech_name, texture, orig_node)
 					})
 				elseif s == "fancy" then
 					desc = S("Fancy @1 banister", name)
-					minetest.register_craft({
+					core.register_craft({
 						output = string.format("banisters:%s_fancy_horizontal 3", tech_name),
 						recipe = {
 							{ orig_node,     orig_node,     orig_node },
@@ -142,9 +144,8 @@ function banisters.register(tech_name, texture, orig_node)
 			end
 
 
-			minetest.register_node(itemstring, {
+			core.register_node(itemstring, {
 				description = desc,
-				drawtype = "mesh",
 				selection_box = cbox,
 				collision_box = cbox,
 				paramtype = "light",
@@ -153,8 +154,8 @@ function banisters.register(tech_name, texture, orig_node)
 				groups = g,
 				drawtype = "mesh",
 				mesh = s .. t .. ".obj",
-				tiles = minetest.registered_nodes[orig_node].tiles,
-				sounds = minetest.registered_nodes[orig_node].sounds,
+				tiles = core.registered_nodes[orig_node].tiles,
+				sounds = core.registered_nodes[orig_node].sounds,
 				drop = string.format("banisters:%s_%s_horizontal", tech_name, s)
 			})
 		end

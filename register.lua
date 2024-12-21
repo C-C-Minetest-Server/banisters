@@ -19,32 +19,32 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ]]
 
-if minetest.get_modpath("default") then
-	banisters.register("wood", "default_wood.png", "default:wood")
-	banisters.register("acacia", "default_acacia_wood.png", "default:acacia_wood")
-	banisters.register("aspen", "default_aspen_wood.png", "default:aspen_wood")
-	banisters.register("junglewood", "default_junglewood.png", "default:junglewood")
-	banisters.register("pine", "default_pine_wood.png", "default:pine_wood")
-	banisters.register("stone", "default_stone.png", "default:stone")
-	banisters.register("desertstone", "default_desert_stone.png", "default:desert_stone")
-	banisters.register("sandstone", "default_sandstone.png", "default:sandstone")
-	banisters.register("desert_sandstone", "default_desert_sandstone.png", "default:desert_sandstone")
-	banisters.register("silver_sandstone", "default_silver_sandstone.png", "default:silver_sandstone")
+if core.get_modpath("default") then
+	banisters.register("banisters", "wood", "default:wood")
+	banisters.register("banisters", "acacia", "default:acacia_wood")
+	banisters.register("banisters", "aspen", "default:aspen_wood")
+	banisters.register("banisters", "junglewood", "default:junglewood")
+	banisters.register("banisters", "pine", "default:pine_wood")
+	banisters.register("banisters", "stone", "default:stone")
+	banisters.register("banisters", "desertstone", "default:desert_stone")
+	banisters.register("banisters", "sandstone", "default:sandstone")
+	banisters.register("banisters", "desert_sandstone", "default:desert_sandstone")
+	banisters.register("banisters", "silver_sandstone", "default:silver_sandstone")
 end
 
-if minetest.get_modpath("ethereal") then
-	banisters.register("bamboo", "ethereal_bamboo_floor.png", "ethereal:bamboo_block")
-	banisters.register("banana", "ethereal_banana_wood.png", "ethereal:banana_wood")
-	banisters.register("birch", "moretrees_birch_wood.png", "ethereal:birch_wood")
-	banisters.register("frost", "ethereal_frost_wood.png", "ethereal:frost_wood")
-	banisters.register("olive", "ethereal_olive_wood.png", "ethereal:olive_wood")
-	banisters.register("palm", "moretrees_palm_wood.png", "ethereal:palm_wood")
-	banisters.register("redwood", "ethereal_redwood_wood.png", "ethereal:redwood_wood")
-	banisters.register("sakura", "ethereal_sakura_wood.png", "ethereal:sakura_wood")
-	banisters.register("willow", "ethereal_willow_wood.png", "ethereal:willow_wood")
-	banisters.register("yellow", "ethereal_yellow_wood.png", "ethereal:yellow_wood")
+if core.get_modpath("ethereal") then
+	banisters.register("banisters", "bamboo", "ethereal:bamboo_block")
+	banisters.register("banisters", "banana", "ethereal:banana_wood")
+	banisters.register("banisters", "birch", "ethereal:birch_wood")
+	banisters.register("banisters", "frost", "ethereal:frost_wood")
+	banisters.register("banisters", "olive", "ethereal:olive_wood")
+	banisters.register("banisters", "palm", "ethereal:palm_wood")
+	banisters.register("banisters", "redwood", "ethereal:redwood_wood")
+	banisters.register("banisters", "sakura", "ethereal:sakura_wood")
+	banisters.register("banisters", "willow", "ethereal:willow_wood")
+	banisters.register("banisters", "yellow", "ethereal:yellow_wood")
 end
 
-if minetest.get_modpath("maple") then
-	banisters.register("maple", "maple_wood.png", "maple:maple_wood")
+if core.get_modpath("maple") then
+	banisters.register("banisters", "maple", "maple:maple_wood")
 end
