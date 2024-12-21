@@ -103,8 +103,8 @@ function banisters.register(mod_name, tech_name, orig_node)
 
 	mod_name = mod_name or core.get_current_modname()
 
-	for s in pairs(styles) do
-		for t in pairs(types) do
+	for _, s in pairs(styles) do
+		for _, t in pairs(types) do
 			local itemstring = string.format(":%s:%s_%s%s", mod_name, tech_name, s, t)
 
 			-- nodeboxes taken from VanessaE's homedecor
@@ -113,8 +113,9 @@ function banisters.register(mod_name, tech_name, orig_node)
 				fixed = { -9 / 16, -3 / 16, 5 / 16, 9 / 16, 24 / 16, 8 / 16 }
 			}
 
-			local g = prepare_groups(core.registered_nodes[orig_node].groups)
-			local name = core.registered_nodes[orig_node].description or tech_name
+			local ndef = assert(core.registered_nodes[orig_node], "Node " .. orig_node .. " not found")
+			local g = prepare_groups(ndef.groups)
+			local name = ndef.description or tech_name
 			local desc
 
 			if t == "_horizontal" then
@@ -154,8 +155,8 @@ function banisters.register(mod_name, tech_name, orig_node)
 				groups = g,
 				drawtype = "mesh",
 				mesh = s .. t .. ".obj",
-				tiles = core.registered_nodes[orig_node].tiles,
-				sounds = core.registered_nodes[orig_node].sounds,
+				tiles = ndef.tiles,
+				sounds = ndef.sounds,
 				drop = string.format("banisters:%s_%s_horizontal", tech_name, s)
 			})
 		end

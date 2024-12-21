@@ -48,3 +48,11 @@ end
 if core.get_modpath("maple") then
 	banisters.register("banisters", "maple", "maple:maple_wood")
 end
+
+if core.get_modpath("moretrees") and moretrees.enable_planks then
+	for treename, treedata in pairs(moretrees.treedesc) do
+		if treedata.planks then
+			banisters.register("banisters", treename, "moretrees:" .. treename .. "_planks")
+		end
+	end
+end

@@ -22,6 +22,8 @@ read_globals = {
 
     "vector",
 
+    "moretrees",
+
     table = {
         fields = {
             "copy",
