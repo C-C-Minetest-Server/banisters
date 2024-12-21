@@ -89,7 +89,7 @@ local function prepare_groups(groups)
 end
 
 -- Node register function
-function banisters.register(mod_name, tech_name, orig_node)
+function banisters.register(mod_name, tech_name, orig_node, rotate)
 	local types = {
 		"_horizontal",
 		"_diagonal_left",
@@ -103,6 +103,14 @@ function banisters.register(mod_name, tech_name, orig_node)
 
 	mod_name = mod_name or core.get_current_modname()
 
+	local ndef = assert(core.registered_nodes[orig_node], "Node " .. orig_node .. " not found")
+	local tiles = table.copy(ndef.tiles)
+	if rotate then
+		for i, tile in ipairs(tiles) do
+			tiles[i] = tile .. "^[transformR90"
+		end
+	end
+
 	for _, s in pairs(styles) do
 		for _, t in pairs(types) do
 			local itemstring = string.format(":%s:%s_%s%s", mod_name, tech_name, s, t)
@@ -113,7 +121,6 @@ function banisters.register(mod_name, tech_name, orig_node)
 				fixed = { -9 / 16, -3 / 16, 5 / 16, 9 / 16, 24 / 16, 8 / 16 }
 			}
 
-			local ndef = assert(core.registered_nodes[orig_node], "Node " .. orig_node .. " not found")
 			local g = prepare_groups(ndef.groups)
 			local name = ndef.description or tech_name
 			local desc
@@ -144,7 +151,6 @@ function banisters.register(mod_name, tech_name, orig_node)
 				g.not_in_creative_inventory = 1
 			end
 
-
 			core.register_node(itemstring, {
 				description = desc,
 				selection_box = cbox,
@@ -155,7 +161,7 @@ function banisters.register(mod_name, tech_name, orig_node)
 				groups = g,
 				drawtype = "mesh",
 				mesh = s .. t .. ".obj",
-				tiles = ndef.tiles,
+				tiles = tiles,
 				sounds = ndef.sounds,
 				drop = string.format("banisters:%s_%s_horizontal", tech_name, s)
 			})

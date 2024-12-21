@@ -33,14 +33,14 @@ if core.get_modpath("default") then
 end
 
 if core.get_modpath("ethereal") then
-	banisters.register("banisters", "bamboo", "ethereal:bamboo_block")
+	banisters.register("banisters", "bamboo", "ethereal:bamboo_block", true)
 	banisters.register("banisters", "banana", "ethereal:banana_wood")
 	banisters.register("banisters", "birch", "ethereal:birch_wood")
 	banisters.register("banisters", "frost", "ethereal:frost_wood")
 	banisters.register("banisters", "olive", "ethereal:olive_wood")
 	banisters.register("banisters", "palm", "ethereal:palm_wood")
 	banisters.register("banisters", "redwood", "ethereal:redwood_wood")
-	banisters.register("banisters", "sakura", "ethereal:sakura_wood")
+	banisters.register("banisters", "sakura", "ethereal:sakura_wood", true)
 	banisters.register("banisters", "willow", "ethereal:willow_wood")
 	banisters.register("banisters", "yellow", "ethereal:yellow_wood")
 end
